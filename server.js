@@ -16,6 +16,14 @@ app.use((req, res, next) => {
   res.setHeader('X-Powered-By', 'PHP 7.4.3');
   next();
 });
+app.use((req, res, next) => {
+  // FCC's legacy app-info route reads this property, removed from newer Node versions.
+  Object.defineProperty(res, '_headers', {
+    configurable: true,
+    get: () => res.getHeaders()
+  });
+  next();
+});
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
