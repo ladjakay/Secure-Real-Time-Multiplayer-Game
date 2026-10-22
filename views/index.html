@@ -1,32 +1,85 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Secure Real-Time Multiplayer Game</title>
+    <title>Neon Drift — Multiplayer Arcade</title>
     <meta
       name="description"
-      content="An example for the fCC InfoSec Secure Real-Time Multiplayer Game project"
+      content="Collect neon shards, climb the live leaderboard, and drift around the arena with friends."
     />
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="../public/style.css" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#101b2d" />
+    <link rel="stylesheet" href="/public/style.css" type="text/css" />
     <script src="/socket.io/socket.io.js"></script>
   </head>
   <body>
-    <header>
-      <h1>Secure Real Time Multiplayer Game</h1>
-    </header>
-    <hr style="margin: 25px" />
-    <div class="container">
-      <canvas 
-        ref="game"
-        id="game-window" 
-        width="640" 
-        height="480"
-      >
-      </canvas>
-    </div>
+    <main class="shell">
+      <header class="topbar">
+        <a class="wordmark" href="/" aria-label="Neon Drift home">
+          <span class="mark" aria-hidden="true">N</span>
+          <span>NEON<span class="wordmark-accent">DRIFT</span></span>
+        </a>
+        <div class="connection">
+          <span id="connection-dot" class="connection-dot" aria-hidden="true"></span>
+          <span id="connection-status" role="status">Connecting…</span>
+        </div>
+      </header>
+
+      <section class="intro" aria-labelledby="game-title">
+        <div>
+          <p class="eyebrow">THE ARCADE IS OPEN</p>
+          <h1 id="game-title">Own the <span>glow.</span></h1>
+          <p class="subtitle">Collect shards. Outscore the room.</p>
+        </div>
+        <div class="stats" aria-live="polite">
+          <div class="stat-card">
+            <span class="stat-label">YOUR SCORE</span>
+            <strong id="score">0</strong>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">YOUR RANK</span>
+            <strong id="rank">Rank: --/--</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="game-layout" aria-label="Multiplayer game">
+        <div class="arena">
+          <canvas id="game-window" width="960" height="600" aria-label="Game arena">
+            Your browser does not support the HTML Canvas API.
+          </canvas>
+          <div class="arena-caption">
+            <span><i class="legend-player" aria-hidden="true"></i> PLAYERS</span>
+            <span><i class="legend-shard" aria-hidden="true"></i> SHARDS +1</span>
+          </div>
+        </div>
+        <aside class="sidebar">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">LIVE ROOM</p>
+              <h2>Leaderboard</h2>
+            </div>
+            <span class="live-pill"><span></span> LIVE</span>
+          </div>
+          <ol id="players" class="player-list" aria-live="polite"></ol>
+          <div class="controls">
+            <p class="eyebrow">HOW TO MOVE</p>
+            <div class="control-row">
+              <span class="key">W</span><span class="key">A</span>
+              <span class="key">S</span><span class="key">D</span>
+              <span class="control-or">or</span>
+              <span class="key key-arrow">↑</span>
+              <span class="key key-arrow">←</span>
+              <span class="key key-arrow">↓</span>
+              <span class="key key-arrow">→</span>
+            </div>
+            <p class="control-help">Move around the arena and touch a glowing shard to score.</p>
+          </div>
+        </aside>
+      </section>
+      <footer><span>ONE ARENA · EVERYONE CONNECTED</span><span>MOVE WITH WASD OR ARROW KEYS</span></footer>
+    </main>
   </body>
-  <script src="../public/game.mjs" type="module"></script>
+  <script src="/public/game.mjs" type="module"></script>
 </html>

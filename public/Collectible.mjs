@@ -1,6 +1,10 @@
 class Collectible {
-  constructor({x, y, value, id}) {
-
+  constructor({ x = 0, y = 0, value = 1, id } = {}) {
+    this.id = id || `collectible-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    this.x = Number.isFinite(x) ? x : 0;
+    this.y = Number.isFinite(y) ? y : 0;
+    this.value = Number.isFinite(value) && value > 0 ? value : 1;
+    this.radius = 10;
   }
 
 }
